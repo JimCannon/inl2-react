@@ -1,0 +1,14 @@
+.profileWrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.profileImg {
+  width: 5vh;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.displayUsername {
+  align-self: center;
+}

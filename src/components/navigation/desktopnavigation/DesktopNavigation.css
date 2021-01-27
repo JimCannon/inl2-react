@@ -1,0 +1,31 @@
+.desktopNavigationWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: #b5d5d1;
+}
+
+/* .navigationLogotype {
+  width: 100px;
+  align-self: center;
+} */
+
+.signIn {
+  justify-content: end;
+  align-self: center;
+}
+
+.players {
+  align-self: center;
+}
+
+.profile {
+  justify-content: end;
+  align-self: center;
+}
+
+.navigationLogotype,
+.signIn,
+.desktopNavigationWrapper {
+  cursor: pointer;
+}
