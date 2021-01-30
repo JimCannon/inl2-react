@@ -8,16 +8,17 @@ import { PlayersView } from "../views/PlayersView";
 
 export const Routing = (props) => {
   const [authUser, setAuthUser] = useContext(UserContext);
+  const test = localStorage.getItem("user");
 
-  // const checkIfUserIsAuthenticatedInBrowser = () => {
-  //   if (!authUser && localStorage.getItem("user")) {
-  //     setAuthUser(localStorage.getItem("user"));
-  //   }
-  // };
+  const checkIfUserIsAuthenticatedInBrowser = () => {
+    if (!authUser && localStorage.getItem("user")) {
+      setAuthUser(localStorage.getItem("user"));
+    }
+  };
 
-  // useEffect(() => {
-  //   checkIfUserIsAuthenticatedInBrowser();
-  // }, []);
+  useEffect(() => {
+    checkIfUserIsAuthenticatedInBrowser();
+  }, []);
 
   const { children } = props;
 
@@ -25,9 +26,9 @@ export const Routing = (props) => {
     <Router>
       {children}
       <Switch>
-        <Route exact Path={RoutingPath.homeView} component={HomeView} />
-        <Route exact Path={RoutingPath.signInView} component={SignInView} />
-        <Route exact Path={RoutingPath.playersView} component={PlayersView} />
+        <Route exact path={RoutingPath.homeView} component={HomeView} />
+        <Route exact path={RoutingPath.signInView} component={SignInView} />
+        <Route exact path={RoutingPath.playersView} component={PlayersView} />
       </Switch>
     </Router>
   );

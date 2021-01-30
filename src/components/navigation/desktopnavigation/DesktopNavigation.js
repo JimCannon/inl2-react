@@ -9,31 +9,25 @@ export const DesktopNavigation = () => {
   const history = useHistory();
   const [authUser, setAuthUser] = useContext(UserContext);
 
-  // const displayUserIfAuthenticated = () => {
-  //   return authUser ? (
-  //     <div className="profile">
-  //       <Profile />
-  //     </div>
-  //   ) : (
-  //     <span
-  //       onClick={() => history.push(RoutingPath.signInView)}
-  //       className="signIn"
-  //     >
-  //       Sign in
-  //     </span>
-  //   );
-  // };
-
-  return (
-    <div className="desktopNavigationWrapper">
-      <span onClick={() => history.push(RoutingPath.homeView)}>Home</span>
-      {/* {displayUserIfAuthenticated()} */}
+  const displayUserIfAuthenticated = () => {
+    return authUser ? (
+      <div className="profile">
+        <Profile />
+      </div>
+    ) : (
       <span
         onClick={() => history.push(RoutingPath.signInView)}
         className="signIn"
       >
         Sign in
       </span>
+    );
+  };
+
+  return (
+    <div className="desktopNavigationWrapper">
+      <span onClick={() => history.push(RoutingPath.homeView)}>Home</span>
+      {displayUserIfAuthenticated()}
       <span onClick={() => history.push("/players")} className="players">
         Players
       </span>

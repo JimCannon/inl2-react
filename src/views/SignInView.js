@@ -20,6 +20,8 @@ export const SignInView = () => {
 
   return (
     <div>
+      <h1>{loginCredentials.username}</h1>
+      <h1>{loginCredentials.password}</h1>
       <form>
         <input
           placeholder="username"
