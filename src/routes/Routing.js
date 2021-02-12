@@ -7,12 +7,16 @@ import { SignInView } from "../views/SignInView";
 import { PlayersView } from "../views/PlayersView";
 
 export const Routing = (props) => {
-  const [authUser, setAuthUser] = useContext(UserContext);
-  const test = localStorage.getItem("user");
+  const { authUser } = useContext(UserContext);
+  const { starWarsCharacterData } = useContext(UserContext);
+  // const [authUser, setAuthUser] = useContext(UserContext);
+  // const [starWarsCharacterData, setStarWarsCharacterData] = useContext(UserContext);
+  const [authUserTest, setAuthUserTest] = authUser;
+  const [starWarsCharacterDataTest, setStarWarsCharacterDataTest] = starWarsCharacterData;
 
   const checkIfUserIsAuthenticatedInBrowser = () => {
-    if (!authUser && localStorage.getItem("user")) {
-      setAuthUser(localStorage.getItem("user"));
+    if (!authUserTest && localStorage.getItem("user")) {
+      setAuthUserTest(localStorage.getItem("user"));
     }
   };
 

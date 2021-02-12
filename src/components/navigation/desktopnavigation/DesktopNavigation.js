@@ -6,19 +6,18 @@ import { UserContext } from "../../../shared/provider/UserProvider";
 import { Profile } from "../../profile/Profile";
 
 export const DesktopNavigation = () => {
+  const { authUser } = useContext(UserContext);
   const history = useHistory();
-  const [authUser, setAuthUser] = useContext(UserContext);
+  // const [authUser, setAuthUser] = useContext(UserContext);
+  const [authUserTest, setAuthUserTest] = authUser;
 
   const displayUserIfAuthenticated = () => {
-    return authUser ? (
+    return authUserTest ? (
       <div className="profile">
         <Profile />
       </div>
     ) : (
-      <span
-        onClick={() => history.push(RoutingPath.signInView)}
-        className="signIn"
-      >
+      <span onClick={() => history.push(RoutingPath.signInView)} className="signIn">
         Sign in
       </span>
     );

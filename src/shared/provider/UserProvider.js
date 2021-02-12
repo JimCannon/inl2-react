@@ -6,10 +6,17 @@ export const UserContext = createContext();
 //include variables that we're passing
 export const UserProvider = (props) => {
   const [authUser, setAuthUser] = useState();
+  const [starWarsCharacterData, setStarWarsCharacterData] = useState();
   const { children } = props;
 
   return (
-    <UserContext.Provider value={[authUser, setAuthUser]}>
+    <UserContext.Provider
+      // value={([authUser, setAuthUser], [starWarsCharacterData, setStarWarsCharacterData])}
+      value={{
+        authUser: [authUser, setAuthUser],
+        starWarsCharacterData: [starWarsCharacterData, setStarWarsCharacterData],
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

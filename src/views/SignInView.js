@@ -8,27 +8,26 @@ export const SignInView = () => {
     username: "",
     password: "",
   });
+  // eslint-disable-next-line
   const [authUser, setAuthUser] = useContext(UserContext);
   const history = useHistory();
 
   const signIn = () => {
-    history.push(RoutingPath.homeView);
     setAuthUser(loginCredentials.username);
     localStorage.setItem("user", loginCredentials.username);
-    history.push("/home");
+    history.push(RoutingPath.homeView);
   };
 
   const updateLoginCredentials = (event) => {
     setLoginCredentials({
       ...loginCredentials,
-      name: event.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 
   return (
     <div>
-      <h1>{loginCredentials.username}</h1>
-      <h1>{loginCredentials.password}</h1>
+      <h1>HEJ</h1>
       <form>
         <input
           name="username"
@@ -43,7 +42,9 @@ export const SignInView = () => {
           onChange={(event) => updateLoginCredentials(event)}
         />
         <br />
-        <button onClick={() => signIn()}>Sign in</button>
+        <button type="button" onClick={() => signIn()}>
+          Sign in
+        </button>
       </form>
     </div>
   );
