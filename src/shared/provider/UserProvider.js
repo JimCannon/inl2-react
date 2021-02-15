@@ -7,14 +7,16 @@ export const UserContext = createContext();
 export const UserProvider = (props) => {
   const [authUser, setAuthUser] = useState();
   const [starWarsCharacterData, setStarWarsCharacterData] = useState();
+  //put the count in useContext instead so we get the same value for different views
+  const [starWarsCharacterCount, setStarWarsCharacterCount] = useState(1);
   const { children } = props;
 
   return (
     <UserContext.Provider
-      // value={([authUser, setAuthUser], [starWarsCharacterData, setStarWarsCharacterData])}
       value={{
         authUser: [authUser, setAuthUser],
         starWarsCharacterData: [starWarsCharacterData, setStarWarsCharacterData],
+        starWarsCharacterCount: [starWarsCharacterCount, setStarWarsCharacterCount],
       }}
     >
       {children}

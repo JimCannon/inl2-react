@@ -9,11 +9,13 @@ export const SignInView = () => {
     password: "",
   });
   // eslint-disable-next-line
-  const [authUser, setAuthUser] = useContext(UserContext);
+  // const [authUser, setAuthUser] = useContext(UserContext);
+  const { authUser } = useContext(UserContext);
+  const [authUserTest, setAuthUserTest] = authUser;
   const history = useHistory();
 
   const signIn = () => {
-    setAuthUser(loginCredentials.username);
+    setAuthUserTest(loginCredentials.username);
     localStorage.setItem("user", loginCredentials.username);
     history.push(RoutingPath.homeView);
   };

@@ -3,10 +3,10 @@ import { UserContext } from "../shared/provider/UserProvider";
 import StarWarsAPIService from "../shared/api/service/StarWarsAPIService";
 
 export const PlayersView = () => {
-  const { starWarsCharacterData } = useContext(UserContext);
-  // const [starWarsCharacterData, setStarWarsCharacterData] = useContext(UserContext);
+  const { starWarsCharacterData, starWarsCharacterCount } = useContext(UserContext);
   const [starWarsCharacterDataTest, setStarWarsCharacterDataTest] = starWarsCharacterData;
-  const [count, setCount] = useState(1);
+  //get the shared characterCounter from useContext
+  const [count, setCount] = starWarsCharacterCount;
 
   //checks if count is 1. If not, proceed decrementing.
   const unableCountToGetBelow1 = () => {

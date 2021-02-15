@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { UserContext } from "../shared/provider/UserProvider";
 
 export const HomeView = () => {
-  // const [starWarsCharacterData, setStarWarsCharacterData] = useContext(UserContext);
   const { starWarsCharacterData } = useContext(UserContext);
   const [starWarsCharacterDataTest, setStarWarsCharacterDataTest] = starWarsCharacterData;
 
