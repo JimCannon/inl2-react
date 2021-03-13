@@ -2,19 +2,23 @@ import express from "express"
 import dotenv from "dotenv"
 import helmet from "helmet"
 import morgan from "morgan"
+import Configurations from "./configurations/Configurations.js"
+import Middlewares from "./src/middlewares/Middlewares.js"
+import cors from "cors"
+import UserRoutes from "./src/routes/User.routes.js"
 
 dotenv.config()
 const app = express()
 const port = process.env.PORT
-
 app.use(express.json())
+app.use(cors({ credentials: true }))
 app.use(helmet())
 app.use(morgan("common"))
 
-app.get("/", (req, res) => {
-	res.send("Hola Mundo!")
-})
+UserRoutes.routes(app)
 
-app.listen(port, () => {
-	console.log(`SERVER IS RUNNING ON PORT: ${port}`)
-})
+app.use(Middlewares.notFound)
+app.use(Middlewares.errorHandler)
+
+Configurations.connectToPort(app)
+Configurations.connectToDatabase()
