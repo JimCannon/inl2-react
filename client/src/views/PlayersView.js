@@ -1,55 +1,68 @@
-import { useState, useEffect, useContext } from "react";
-import { UserContext } from "../shared/provider/UserProvider";
-import StarWarsAPIService from "../shared/api/service/StarWarsAPIService";
+import { useState, useEffect, useContext } from "react"
+import { UserContext } from "../shared/provider/UserProvider"
+import BackendAPIService from "../shared/api/service/BackendAPIService"
+import "./PlayersView.css"
 
 export const PlayersView = () => {
-  const { starWarsCharacterData, starWarsCharacterCount } = useContext(UserContext);
-  const [starWarsCharacterDataTest, setStarWarsCharacterDataTest] = starWarsCharacterData;
-  //get the shared characterCounter from useContext
-  const [count, setCount] = starWarsCharacterCount;
+	const [users, setUsers] = useState([])
+	const [loading, setLoading] = useState(false)
+	const [newUser, setNewUser] = useState({
+		username: "Flädersaft",
+		age: 0,
+		password: "secret",
+	})
 
-  //checks if count is 1. If not, proceed decrementing.
-  const unableCountToGetBelow1 = () => {
-    count <= 1 ? setCount(1) : setCount(count - 1);
-  };
+	const create = async () => {
+		try {
+			setLoading(true)
+			await BackendAPIService.createUser(newUser)
+			setLoading(false)
+		} catch (error) {
+			console.log(error)
+		}
+	}
 
-  const getDataFromStarWarsAPI = async () => {
-    try {
-      const response = await StarWarsAPIService.getStarWarsCharacter(count);
-      //Store the data in our state
-      setStarWarsCharacterDataTest(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+	const fetchData = async () => {
+		const response = await BackendAPIService.getAllUsers()
+		setUsers(response.data)
+	}
 
-  // const getDataFromStarWarsAPI = async () => {
-  //   try {
-  //     const response = await StarWarsAPIService.getStarWarsCharacter(count);
-  //     //Store the data in our state
-  //     setStarWarsCharacterData(response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+	const removePlayer = async () => {
+		try {
+			const response = await BackendAPIService.deleteUser()
+		} catch (error) {}
+	}
 
-  useEffect(() => {
-    //We want make a call to the API the first time we render this page
-    getDataFromStarWarsAPI();
-  }, [count]);
+	useEffect(() => {
+		fetchData()
+	}, [loading])
 
-  return (
-    <div>
-      {/* Display some delicous data about the character */}
-      {/* Using optional chaining incase the data is undefined or null */}
-      <h1>Name: {starWarsCharacterDataTest?.data?.name}</h1>
-      <h1>Birth Year: {starWarsCharacterDataTest?.data?.birth_year}</h1>
-      <h1>Height: {starWarsCharacterDataTest?.data?.height}</h1>
-      <h1>Weight: {starWarsCharacterDataTest?.data?.mass}</h1>
-      <h1>Gender: {starWarsCharacterDataTest?.data?.gender}</h1>
-      <button onClick={() => unableCountToGetBelow1()}>Get previous character</button>
-      <button onClick={() => setCount(count + 1)}>Get next chracter</button>
-      {console.log(count)}
-    </div>
-  );
-};
+	return (
+		<div>
+			<div className="playersContainer">
+				{users.map((x) => (
+					<div className="playersCard" key={x._id} onClick={() => console.log(x._id)}>
+						<h3>Name: {x.username}</h3>
+						{x.age ? <h3>Age: {x.age}</h3> : <h3>N/A</h3>}
+						{/* <p onClick={() => console.log("hej")}>Remove player</p> */}
+					</div>
+				))}
+			</div>
+			<hr />
+			<div>
+				<h1>Backend API:</h1>
+				<p>USERNAME</p>
+				<input
+					onChange={(event) => setNewUser({ ...newUser, username: event.target.value })}
+				/>{" "}
+				<br />
+				<p>PASSWORD</p>
+				<input onChange={(event) => setNewUser({ ...newUser, password: event.target.value })} />
+				<br />
+				<p>AGE</p>
+				<input onChange={(event) => setNewUser({ ...newUser, age: event.target.value })} /> <br />
+				<button onClick={() => create()}>Create User</button>
+			</div>
+		</div>
+	)
+}

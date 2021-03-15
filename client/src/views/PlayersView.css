@@ -1,0 +1,16 @@
+.playersContainer {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: auto;
+	justify-content: center;
+}
+
+.playersCard {
+	display: flex;
+	flex-direction: column;
+	width: 20%;
+	align-items: center;
+	margin: 10px;
+	border: solid;
+	cursor: pointer;
+}
