@@ -8,9 +8,9 @@ const getAllUsers = () => {
 	return http.get("/user")
 }
 
-const deleteUser = () => {
-	return http.delete("/delete")
-}
+// const deleteUser = async (id) => {
+// 	return await http.delete("/delete", id)
+// }
 
 export default {
 	createUser,

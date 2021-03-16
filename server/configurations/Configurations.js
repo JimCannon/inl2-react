@@ -25,7 +25,12 @@ const connectToDatabase = async () => {
 	}
 }
 
+const connectToFrontend = (app) => {
+	app.use(express("client/build"))
+}
+
 export default {
 	connectToDatabase,
 	connectToPort,
+	connectToFrontend,
 }
