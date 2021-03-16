@@ -19,19 +19,19 @@ const testingNonExistentRoute = () => {
 	})
 }
 
-const getAllUsers = () => {
-	test("Expecting a return of all users in database", (done) => {
-		Chai.request(app)
-			.get("/user")
-			.end((request, response) => {
-				response.should.have.a.status(200)
-				response.body.should.be.a("array")
-				done()
-			})
-	})
-}
+// const getAllUsers = () => {
+// 	test("Expecting a return of all users in database", (done) => {
+// 		Chai.request(app)
+// 			.get("/user")
+// 			.end((request, response) => {
+// 				response.should.have.a.status(200)
+// 				response.body.should.be.a("array")
+// 				done()
+// 			})
+// 	})
+// }
 
 describe("TESTING THE USER API ENTITY", () => {
 	testingNonExistentRoute()
-	getAllUsers()
+	// getAllUsers()
 })
