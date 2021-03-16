@@ -4,10 +4,10 @@ import dotenv from "dotenv"
 dotenv.config()
 
 const DB_URL = process.env.DATABASE_URL
-const port = process.env.PORT
+const port = process.env.PORT || 3001
 
 const connectToPort = (app) => {
-	app.listen(port, () => {
+	app.listen(process.env.PORT || 3001, () => {
 		console.log(`SERVER IS RUNNING ON PORT: ${port}`)
 	})
 }
